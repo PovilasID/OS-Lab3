@@ -8,6 +8,9 @@ PROGS = test
 all: $(PROGS)
 
 test: ./precompile/main.c
+	./precompile/functions01.c
+	./precompile/functions02.c
+
 
 clean:
 	-rm -f $(RPOGS)
