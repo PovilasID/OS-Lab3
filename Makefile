@@ -7,7 +7,7 @@ PROGS = test
 
 all: $(PROGS)
 
-test: ./precompile/*
+test: ./*
 
 
 clean:
