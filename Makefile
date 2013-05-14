@@ -7,7 +7,7 @@ PROGS = test
 
 all: $(PROGS)
 
-test: precompile/main.c
+test: ./precompile/main.c
 
 clean:
 	-rm -f $(RPOGS)
