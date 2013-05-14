@@ -23,7 +23,7 @@ int main(){
 	printf( "(C) 2013 Povilas Sidaravicius %s\n", __FILE__ );
 
 	printf("%s\n", ps_test_getcwd());
-	printf("dir = %d\n", dir = ps_test_open("."));
+	printf("dir = %d\n", dir = ps_test_open(".", O_RDONLY ));
 	ps_test_chdir("/tmp");
 	printf("%s\n", ps_test_getcwd());
 	ps_test_fchdir(dir);

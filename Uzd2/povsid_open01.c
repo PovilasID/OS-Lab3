@@ -4,7 +4,7 @@
 #ifndef POVSID_OPEN01_C
 #define POVSID_OPEN01_C
 
-int ps_test_open(const char *name);
+int ps_test_open(const char *name, int oflag, ...);
 int ps_test_close(int fd);
 
 #if __INCLUDE_LEVEL__ == 0
@@ -21,7 +21,7 @@ int main( int argc, char *argv[] ){
 		printf( "Naudojimas:\n %s failas_ar_katalogas\n", argv[0] );
 		exit( 255 );
 	}
-	d = ps_test_open( argv[1] );
+	d = ps_test_open( argv[1], O_RDONLY );
 	ps_test_close( d );
 	ps_test_close( d ); /* turi mesti close klaida */
 	return 0;
@@ -29,9 +29,9 @@ int main( int argc, char *argv[] ){
 
 #endif
 
-int ps_test_open(const char *name){
+int ps_test_open(const char *name, int oflag, ...){
 	int dskr;
-	dskr = open( name, O_RDONLY );
+	dskr = open( name, oflag );
 	if( dskr == -1 ){
 		perror( name );
 		exit(1);
@@ -43,7 +43,7 @@ int ps_test_open(const char *name){
 int ps_test_close(int fd){
 	int rv;
 	rv = close( fd );
-	if( rv != 0 ) perror ( "Klaida iškvietus close() funkciją" );
+	if( rv != 0 ) perror ( "Klaida iskvietus close() funkcija" );
 	else if (__INCLUDE_LEVEL__ == 0) puts( "closed" );
 	return rv;
 }
