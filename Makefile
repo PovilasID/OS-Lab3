@@ -7,9 +7,7 @@ PROGS = test
 
 all: $(PROGS)
 
-test: ./precompile/main.c
-test: ./precompile/functions01.c
-test: ./precompile/functions02.c
+test: ./precompile/*
 
 
 clean:
