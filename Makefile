@@ -1,21 +1,9 @@
-SRCS = $(wildcard sample*.c) 
-PROGS = $(patsubst %.c,%,$(SRCS))
+targets = test run_test
 
-LIBDIR = ..
-LIB = $(LIBDIR)/libzcontrol.a
-LDFLAGS = -L$(LIBDIR) -lzcontrol -lzmq
+all: $(targets)
 
-CFLAGS = -I$(LIBDIR)
-CFLAGS += -g
-CFLAGS += -Wall 
-CFLAGS += ${EXTRA_CFLAGS}
+test: precompile/main.c
+	gcc -Wall -pedantic precompile/*.c -o test
 
-all: $(PROGS)
-
-$(PROGS): $(SRCS) $(LIB) 
-	$(CC) $(CFLAGS) -o $@ $(@).c $(LDFLAGS)
-
-.PHONY: clean
-
-clean:	
-	rm -f $(PROGS) 
+run_test: test
+	./test
