@@ -1,6 +1,21 @@
-CC = gcc
-CFLAGS = -Wall -std=c99 -O0
+SRCS = $(wildcard sample*.c) 
+PROGS = $(patsubst %.c,%,$(SRCS))
 
+LIBDIR = ..
+LIB = $(LIBDIR)/libzcontrol.a
+LDFLAGS = -L$(LIBDIR) -lzcontrol -lzmq
 
-test: Uzd4/povsid_nice01.c
-	$(cc) $(cflags) Uzd4/*.c -o test
+CFLAGS = -I$(LIBDIR)
+CFLAGS += -g
+CFLAGS += -Wall 
+CFLAGS += ${EXTRA_CFLAGS}
+
+all: $(PROGS)
+
+$(PROGS): $(SRCS) $(LIB) 
+	$(CC) $(CFLAGS) -o $@ $(@).c $(LDFLAGS)
+
+.PHONY: clean
+
+clean:	
+	rm -f $(PROGS) 
